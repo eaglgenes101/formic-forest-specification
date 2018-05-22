@@ -21,13 +21,13 @@ Each game, 16 submissions are put against each other in a game. If the competiti
 
 At the beginning of each game, each cell is reset to the color 0 (white), each submission used in the game has its corresponding submission object constructed, and 2500 food, and 16 queens are randomly scattered onto the map. Queens are very unlikely to be adjacent to food or other queens, but this is not a guarantee. 
 
-Then the game itself proceeds. The game lasts for 30000 turns, and each turn consists of the following phases, each of which is resolved concurrently in turn:
+Then the game itself proceeds. The game lasts for 15000 turns, and each turn consists of the following phases, each of which is resolved concurrently in turn:
 
   - Decide: Each ant's views are determined based on the current state of the arena and its previous move history, and each ant's decision is determined and validated separately.
   - Move: Each ant's decision is executed simultaneously, and the presence of multiple objects in a single cell resolved once all ants that decided to move into a cell have done so.
   - Grow: Each object that can potentially change as a result of its surroundings has its neighborhood resolved, and the changes to the objects as a result happen simultaneously.
 
-After the 30000 turns is up, the game ends. Submission objects are disposed of, caches trimmed down, food amounts logged, and the process started again if more scores need to be collected. 
+After the 15000 turns is up, the game ends. Submission objects are disposed of, caches trimmed down, food amounts logged, and the process started again if more scores need to be collected. 
 
 Ant Senses
 ------
@@ -64,9 +64,9 @@ Fungi
 
 Fungi are a means of spawning more food. Fungus farms may potentially lead to bountiful harvests for submissions that invest the resources to spawn, watch over, guard and harvest these fungi. They may also be strategically planted to obscure the ground or probe for food from a distance. 
 
-If food is within a 9 by 9 cell area centered around the fungus, then the fungus will grow. Internally, fungus takes 65536 steps to mature and spawn into food, and will gain 1 step per generation per piece of food placed in this vicinity. Therefore, placing more food in the vicinity of a fungus will speed up the fungus's growth, but will also make a nice feast for any ants that find it. If a fungus is not within the vicinity of food, it will not grow. 
+If food is within a 9 by 9 cell area centered around the fungus, then the fungus will grow. Internally, fungus takes 32768 steps to mature and spawn into food, and will gain 1 step per generation per piece of food placed in this vicinity. Therefore, placing more food in the vicinity of a fungus will speed up the fungus's growth, but will also make a nice feast for any ants that find it. If a fungus is not within the vicinity of food, it will not grow. 
 
-Growth stages are visible to all ants, and work as a coarse indicator of the age of the fungus. 0 means that the fungus has taken no steps toward maturity, 1 means the fungus has taken 1-15 steps toward maturity, 2 means the fungus has taken 16-255 steps toward maturity, 3 means the fungus has taken 256-4095 steps toward maturity, 4 means the fungus has taken 4096-65535 steps toward maturity, and 5 means the fungus has taken all 65536 steps toward maturity and will turn into food next turn if it is not stepped on. 
+Growth stages are visible to all ants, and work as a coarse indicator of the age of the fungus. 0 means that the fungus has taken no steps toward maturity, 1 means the fungus has taken 1-7 steps toward maturity, 2 means the fungus has taken 8-63 steps toward maturity, 3 means the fungus has taken 64-511 steps toward maturity, 4 means the fungus has taken 512-4095 steps toward maturity, and 5 means the fungus has taken 4096-32767 steps toward maturity. (If a fungus completes all 32768 steps of growth, it matures into food in time for ants to see it as food the next turn.)
 
 Collision Resolution
 ======
