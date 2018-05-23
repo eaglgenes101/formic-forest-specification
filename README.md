@@ -199,7 +199,7 @@ Resource Limits
 
 Each game submission starts with 1 second of reserve time. Each call to the constructor and eachTurn add 1 millisecond to the reserve time, then decrement from the reserve time the time they took to execute. Calls are memoized, and don't count against a submission if they are found in cache. If a submission exhausts its reserve time, it is disqualified. 
 
-Submissions are also limited to 128 Megabytes of memory at any one time. Unlike the time limit, this limit is not enforced automatically, but if a submission turns out to consistently hog memory during games it participates in, I will use a memory profiler to determine if this limit is exceeded. 
+Submissions are also limited to 64 Megabytes of memory at any one time. Unlike the time limit, this limit is not enforced automatically, but if a submission turns out to consistently hog memory during games it participates in, I will use a memory profiler to determine if this limit is exceeded. 
 
 After Submission
 ======
