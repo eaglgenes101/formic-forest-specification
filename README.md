@@ -23,7 +23,7 @@ At the beginning of each game, each cell is reset to the color 0 (white), each s
 
 Then the game itself proceeds. The game lasts for 15000 turns, and each turn consists of the following phases, each of which is resolved concurrently in turn:
 
-  - Decide: Each ant's views are determined based on the current state of the arena and its previous move history, and each ant's decision is determined and validated separately.
+  - Decide: Each ant's views are determined based on the current state of the arena and previous move history, and each ant's decision is determined and validated separately.
   - Move: Each ant's decision is executed simultaneously, and the presence of multiple objects in a single cell resolved once all ants that decided to move into a cell have done so.
   - Grow: Each object that can potentially change as a result of its surroundings has its neighborhood resolved, and the changes to the objects as a result happen simultaneously.
 
@@ -34,12 +34,12 @@ Ant Senses
 
 Each ant has a 5*5 area of sight centered on themselves. This area of sight is arranged to give the ants a relative sense of direction in the immediate term, but not innately in the long term. Ants can see the color of empty cells, and the properties of objects in filled cells, but not the color of filled cells. 
 
-Each ant also has an internal state that can take one of eight values. This state is internal to that ant, and to transfer information between itself and other ants or to remember more than this, it must position itself, drop payloads, or mark the ground below it, all which are subject to enemy interference. 
+Each ant also has an internal state that can take one of eight values. This state is internal to that ant, and to transfer information between herself and other ants or to remember more than this, she must position herself, drop payloads, or mark the ground below her, all which are subject to enemy interference. 
 
 Ant Actions
 ------
 
-Using their senses, ants can decide to move or drop payloads, and also color their current cell and change their current state simultaneously, once per turn. The coloring happens on the cell that the ant is currently in, before it moves. 
+Using their senses, ants can decide to move or drop payloads, and also color their current cell and change their current state simultaneously, once per turn. The coloring happens on the cell that the ant is currently in, before she moves. 
 
 Ants move orthogonally or diagonally one cell at a time. Worker ants are free to move into other cells at their own risk, but a queen may not move to a cell that her view shows is in the Moore neighborhood of a non-adjacent queen, nor to a cell that her view shows is in the von Neumann neighborhood of an adjacent queen. (However, it is legal for a queen to stay still on a cell adjacent to another queen.) Additionally, a queen without food may not move into a step into a cell already occupied by a laden worker, lest she step onto a laden worker that decides to stay still, which would without this restriction kill her. 
   
@@ -55,9 +55,9 @@ Once spawned, ants have an indefinite lifetime. Queen ants are guaranteed to liv
 Ant Leeching
 ------
 
-After movements and collisions are handled, a queen may neighbor one or more unladen enemy workers. If the number of such neighbors is equal to or less than the amount of food carried by that ant, then the queen loses food equal to the number of adjacent enemy workers. An unladen worker ant that neighbors one or more enemy queens that lose food this way gains one food. If a worker is next to multiple such enemy queens, it receives only one food, and one or more food is simply lost forever. 
+After movements and collisions are handled, a queen may neighbor one or more unladen enemy workers. If the number of such neighbors is equal to or less than the amount of food carried by that ant, then the queen loses food equal to the number of adjacent enemy workers. An unladen worker ant that neighbors one or more enemy queens that lose food this way gains one food. If a worker is next to multiple such enemy queens, she receives only one food, and one or more food is simply lost forever. 
 
-This transfer does not occur between allied ants. To perform such food transfers, you must command the laden ant to drop its food in an adjacent cell, and have another ally be in that cell to automatically pick it up. 
+This transfer does not occur between allied ants. To perform such food transfers, you must command the laden ant to drop her food in an adjacent cell, and have another ally be in that cell to automatically pick it up. 
 
 Fungi
 ------
@@ -78,7 +78,7 @@ Ants
 
 Collisions are an unavoidable consequence of multiple ants deciding to enter the same cell independently, or one or more ants entering a cell of an ant that decides not to move from it. Because ants may move only one cell at a time, up to 8 ants can move into the same cell at a time, and may run into an ant standing still in it. Queen-queen collisions are prevented by the rules restricting movement within the vicinity of other queens. 
 
-Collisions of ants are resolved depending on the ants involved. For the purposes of collision resolution, an ant is considered moving if and only if it spent its turn moving itself to a different cell. A newly spawned worker is treated like a moving worker. 
+Collisions of ants are resolved depending on the ants involved. For the purposes of collision resolution, an ant is considered moving if and only if she spent her turn moving herself to a different cell. A newly spawned worker is treated like a moving worker. 
 
   - A queen, if involved in a collision, is always the only survivor. She loses one food if she moved to a cell containing a laden worker that stayed still. As stated previously, a queen without food may not move to a cell already occupied by a laden worker, preventing the case where an unladen queen would step on a laden worker staying still. 
   - The collision of more than one moving laden ants in a worker-only collision results in all involved workers dying, leaving food behind in the cell. 
@@ -91,7 +91,7 @@ Food and Fungi
 
 Fungi do not stack. If multiple fungi are placed into a cell at once, collision resolution proceeds as if only one were placed in. Putting fungus in a cell already containing fungus will destroy the old fungus and create a new one. Fungus is destroyed if it shares its cell with any other object. 
 
-A queen ant that stays or moves into a cell will pick up all contained and/or placed food in that cell. However, if a worker does the same, it can only pick up one of these pieces, and the rest are simply lost forever. If no ants are available to pick up the food, then only one food remains in the cell, with the rest lost forever. 
+A queen ant that stays or moves into a cell will pick up all contained and/or placed food in that cell. However, if a worker does the same, she can only pick up one of these pieces, and the rest are simply lost forever. If no ants are available to pick up the food, then only one food remains in the cell, with the rest lost forever. 
 
 Submission
 ======
@@ -178,7 +178,7 @@ The output expected of the eachTurn method is an object with the following field
         color: (Optional) If present, an integer in 0-7 inclusive, representing the color to color the old cell with
     }
 
-The cell is interpreted with the same rotation as the view. Output cells 0-2 correspond to view indices 6-8, output cells 3-5 correspond to view indices 11-13, and output cells 6-8 correspond to view indices 16-18. If you compare this to the index chart above, it's in the same english reading order as the view array provided. 
+The cell is interpreted with the same rotation as the view. Output cells 0-2 correspond to view indices 6-8, output cells 3-5 correspond to view indices 11-13, and output cells 6-8 correspond to view indices 16-18. If you compare this to the index chart above, this is in the same english reading order as the view array provided. 
 
 No Side Effects
 ------
